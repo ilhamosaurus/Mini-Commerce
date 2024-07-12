@@ -39,6 +39,7 @@ model Account {
 
 model Transaction {
   id          Int      @id @default(autoincrement())
+  invoice     String
   account_id  Int
   amount      Decimal  @db.Decimal(12, 2)
   type        Type

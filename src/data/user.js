@@ -9,4 +9,17 @@ const getUserByUsername = async (username) => {
   return user;
 };
 
-module.exports = { getUserByUsername };
+const getUserDetail = async (username) => {
+  const user = await db.user.findUnique({
+    where: { username },
+    include: { Account: true },
+  });
+
+  if (!user) return null;
+
+  delete user.password;
+
+  return user;
+};
+
+module.exports = { getUserByUsername, getUserDetail };

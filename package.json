@@ -1,12 +1,16 @@
 {
   "name": "aman-test",
   "version": "1.0.0",
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "description": "technical test",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "db:reset": "prisma migrate reset"
   },
   "author": "ilhamosaurus",
   "license": "MIT",
