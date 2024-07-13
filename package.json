@@ -10,7 +10,8 @@
     "dev": "nodemon index.js",
     "start": "node index.js",
     "postinstall": "prisma generate",
-    "db:reset": "prisma migrate reset"
+    "db:reset": "prisma migrate reset",
+    "deploy:docker": "prisma migrate deploy && prisma db seed && npm run start"
   },
   "author": "ilhamosaurus",
   "license": "MIT",
