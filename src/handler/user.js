@@ -9,6 +9,7 @@ const getUserInfo = async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
+    delete user.password;
     return res.status(200).json(user);
   } catch (error) {
     console.error(error);

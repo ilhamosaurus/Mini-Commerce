@@ -234,7 +234,7 @@ const payment = async (req, res) => {
       });
     });
 
-    return res.status(200).json({
+    return res.status(201).json({
       transaction,
       harga: productCost,
       delivery: productCost < 15000 ? ongkirCost : 0,

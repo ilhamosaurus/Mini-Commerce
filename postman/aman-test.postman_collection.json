@@ -1,0 +1,428 @@
+{
+	"info": {
+		"_postman_id": "27f7cfd3-ad0b-4f4a-9c12-7d7ef4dc5b5b",
+		"name": "aman-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31049971",
+		"_collection_link": "https://lively-shuttle-748420.postman.co/workspace/My-Workspace~590c41f0-c893-4fc6-87c6-ecba8367a0ac/collection/31049971-27f7cfd3-ad0b-4f4a-9c12-7d7ef4dc5b5b?action=share&source=collection_link&creator=31049971"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"admin1\",\r\n    \"password\": \"qwerty\",\r\n    \"role\": \"client\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4003/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4003",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"berkah\",\r\n    \"password\": \"berkah\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4003/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4003",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Detail",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjp7ImlkIjoyLCJ1c2VybmFtZSI6ImlsaGFtb3MiLCJyb2xlIjoiQ0xJRU5UIn0sImV4cGlyZXMiOiIyMDI0LTA3LTEzVDEwOjE1OjQ4LjUxMFoiLCJpYXQiOjE3MjA4NTQ5NDgsImV4cCI6MTcyMDg2NTc0OH0.pBPclX-Heoqvx-8SZcnxRjVUlf0oA_xPKiH41zgrcvc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4003/user/info",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4003",
+					"path": [
+						"user",
+						"info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Balance",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6ImJlcmthaCIsInJvbGUiOiJNRVJDSEFOVCJ9LCJleHBpcmVzIjoiMjAyNC0wNy0xM1QxMDozMjoxMi4zMDFaIiwiaWF0IjoxNzIwODU1OTMyLCJleHAiOjE3MjA4NjY3MzJ9.yjx7D10d9r2KI7ZgmBRdnfFPJfOZqLgbzcXLqWgKfwY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4003/user/balance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4003",
+					"path": [
+						"user",
+						"balance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Topup Balance",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjp7ImlkIjoyLCJ1c2VybmFtZSI6ImlsaGFtb3MiLCJyb2xlIjoiQ0xJRU5UIn0sImV4cGlyZXMiOiIyMDI0LTA3LTEzVDEwOjE1OjQ4LjUxMFoiLCJpYXQiOjE3MjA4NTQ5NDgsImV4cCI6MTcyMDg2NTc0OH0.pBPclX-Heoqvx-8SZcnxRjVUlf0oA_xPKiH41zgrcvc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"amount\": 45000.50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4003/transaction/topup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4003",
+					"path": [
+						"transaction",
+						"topup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Transaction history",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6ImJlcmthaCIsInJvbGUiOiJNRVJDSEFOVCJ9LCJleHBpcmVzIjoiMjAyNC0wNy0xM1QxMDozMjoxMi4zMDFaIiwiaWF0IjoxNzIwODU1OTMyLCJleHAiOjE3MjA4NjY3MzJ9.yjx7D10d9r2KI7ZgmBRdnfFPJfOZqLgbzcXLqWgKfwY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4003/transaction/history?productCode=pen",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4003",
+					"path": [
+						"transaction",
+						"history"
+					],
+					"query": [
+						{
+							"key": "pageSize",
+							"value": "10",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "productCode",
+							"value": "pen",
+							"description": "must be a valid product code"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjp7ImlkIjoyLCJ1c2VybmFtZSI6ImlsaGFtb3MiLCJyb2xlIjoiQ0xJRU5UIn0sImV4cGlyZXMiOiIyMDI0LTA3LTEzVDEwOjE1OjQ4LjUxMFoiLCJpYXQiOjE3MjA4NTQ5NDgsImV4cCI6MTcyMDg2NTc0OH0.pBPclX-Heoqvx-8SZcnxRjVUlf0oA_xPKiH41zgrcvc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"kode_produk\": \"pen\",\r\n    \"qty\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4003/transaction/payment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4003",
+					"path": [
+						"transaction",
+						"payment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4003/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4003",
+					"path": [
+						"product"
+					],
+					"query": [
+						{
+							"key": "pageSize",
+							"value": "10",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "merchant",
+							"value": null,
+							"description": "merchant username",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6ImJlcmthaCIsInJvbGUiOiJNRVJDSEFOVCJ9LCJleHBpcmVzIjoiMjAyNC0wNy0xM1QxMDozMjoxMi4zMDFaIiwiaWF0IjoxNzIwODU1OTMyLCJleHAiOjE3MjA4NjY3MzJ9.yjx7D10d9r2KI7ZgmBRdnfFPJfOZqLgbzcXLqWgKfwY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"joy\",\r\n    \"name\": \"Kinder Joy\",\r\n    \"price\": 4500,\r\n    \"weight\": 0.2,\r\n    \"description\": \"Kinderjoy unyu - unyu\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4003/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4003",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product by Code",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6ImJlcmthaCIsInJvbGUiOiJNRVJDSEFOVCJ9LCJleHBpcmVzIjoiMjAyNC0wNy0xM1QxMDozMjoxMi4zMDFaIiwiaWF0IjoxNzIwODU1OTMyLCJleHAiOjE3MjA4NjY3MzJ9.yjx7D10d9r2KI7ZgmBRdnfFPJfOZqLgbzcXLqWgKfwY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4003/product/joy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4003",
+					"path": [
+						"product",
+						"joy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6ImJlcmthaCIsInJvbGUiOiJNRVJDSEFOVCJ9LCJleHBpcmVzIjoiMjAyNC0wNy0xM1QxMDozMjoxMi4zMDFaIiwiaWF0IjoxNzIwODU1OTMyLCJleHAiOjE3MjA4NjY3MzJ9.yjx7D10d9r2KI7ZgmBRdnfFPJfOZqLgbzcXLqWgKfwY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Kinder Joy edit\",\r\n    \"price\": 4500,\r\n    \"weight\": 0.2,\r\n    \"description\": \"Kinderjoy unyu - unyu tapi diedit\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4003/product/joy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4003",
+					"path": [
+						"product",
+						"joy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6ImJlcmthaCIsInJvbGUiOiJNRVJDSEFOVCJ9LCJleHBpcmVzIjoiMjAyNC0wNy0xM1QxMDozMjoxMi4zMDFaIiwiaWF0IjoxNzIwODU1OTMyLCJleHAiOjE3MjA4NjY3MzJ9.yjx7D10d9r2KI7ZgmBRdnfFPJfOZqLgbzcXLqWgKfwY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4003/product/joy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4003",
+					"path": [
+						"product",
+						"joy"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
