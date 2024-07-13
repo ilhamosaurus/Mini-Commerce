@@ -57,7 +57,7 @@ model Product {
   kode        String   @unique
   name        String
   price       Decimal  @db.Decimal(12, 2)
-  weight      Int      @default(0)
+  weight      Float?
   description String?
   createdAt   DateTime @default(now())
   udpateAt    DateTime @updatedAt

@@ -7,6 +7,8 @@ const getInvNumber = async (username) => {
     },
     select: {
       id: true,
+      owner: true,
+      balance: true,
     },
   });
   if (!account) return null;
@@ -28,7 +30,7 @@ const getInvNumber = async (username) => {
   const invNumber = `INV${invDate}-${(transactionNumber + 1)
     .toString()
     .padStart(3, '0')}`;
-  return invNumber;
+  return { invNumber, account };
 };
 
 module.exports = { getInvNumber };

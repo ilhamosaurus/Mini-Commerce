@@ -60,10 +60,11 @@ const products = [
     description: 'Voucher Makanan 100.000',
   },
   {
-    kode: 'QURBAN',
-    name: 'Qurban',
-    price: 200000,
-    description: 'Qurban 200.000',
+    kode: 'PEN',
+    name: 'Pulpen',
+    price: 3000,
+    weight: 0.1,
+    description: 'Pulpen dengan berat 0.1 kg',
   },
   {
     kode: 'ZAKAT',
@@ -82,8 +83,8 @@ const products = [
     kode: 'BUKU',
     name: 'Buku',
     price: 30000,
-    weight: 1,
-    description: 'Buku dengan berat 1 kg',
+    weight: 0.5,
+    description: 'Buku dengan berat 0.5 kg',
   },
   {
     kode: 'BERAS',
@@ -96,8 +97,8 @@ const products = [
     kode: 'LAMPU',
     name: 'Lampu',
     price: 20000,
-    weight: 1,
-    description: 'Lampu dengan berat dibulatkan menjadi 1 kg',
+    weight: 0.3,
+    description: 'Lampu dengan berat 0.3 kg',
   },
 ];
 

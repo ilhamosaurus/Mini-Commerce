@@ -14,4 +14,15 @@ const getBalance = async (username) => {
   };
 };
 
-module.exports = { getBalance };
+const getAccountByUsername = async (username) => {
+  const account = await db.account.findUnique({
+    where: { owner: username },
+    select: { id: true, owner: true, balance: true },
+  });
+
+  if (!account) return null;
+
+  return account;
+};
+
+module.exports = { getBalance, getAccountByUsername };

@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', getProducts);
+app.get('/product', getProducts);
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/transaction', transactionRouter);

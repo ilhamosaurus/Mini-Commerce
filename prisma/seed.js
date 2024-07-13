@@ -7,11 +7,7 @@ const CreateProduct = async () => {
   for (const product of products) {
     const createdProduct = await prisma.product.create({
       data: {
-        kode: product.kode,
-        name: product.name,
-        price: product.price,
-        weight: product.weight ? product.weight : 0,
-        description: product.description,
+        ...product,
       },
     });
 
