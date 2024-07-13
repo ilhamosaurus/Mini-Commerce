@@ -3,6 +3,9 @@ const { getInvNumber } = require('../util/inv');
 const db = require('../util/db');
 const { Type } = require('@prisma/client');
 const { getAccountByUsername } = require('../data/accounts');
+const { getProductsByCode } = require('../data/product');
+const { getProductTransactionHistory } = require('../data/transaction');
+const { Role } = require('@prisma/client');
 
 const topup = async (req, res) => {
   const errors = validationResult(req);
@@ -52,8 +55,20 @@ const topup = async (req, res) => {
 const getHistory = async (req, res) => {
   const pageSize = parseInt(req.query.pageSize) || undefined;
   const page = parseInt(req.query.page) || undefined;
+  const productCode = req.query.productCode || undefined;
   const username = req.username;
+  const role = req.role;
   try {
+    if (productCode) {
+      if (role !== Role.MERCHANT) {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+      const history = await getProductTransactionHistory(productCode);
+      if (!history) {
+        return res.status(404).json({ error: 'Transaction history not found' });
+      }
+      return res.status(200).json({ data: history });
+    }
     const account = await getAccountByUsername(username);
     if (!account) {
       return res.status(404).json({ error: 'Account not found' });
@@ -141,20 +156,20 @@ const payment = async (req, res) => {
       return res.status(404).json({ error: 'Account not found' });
     }
 
-    const produk = await db.product.findUnique({
-      where: { kode: kode_produk },
-      select: { name: true, price: true, weight: true },
-    });
+    const produk = await getProductsByCode(kode_produk);
     if (!produk) {
       return res.status(404).json({ error: 'Kode produk invalid' });
     }
-    //set ongkir to 8000 by default
+    //set ongkir to 8000/kg by default
     const ongkir = 8000;
+    // calculate ongkir cost
+    // Ensure that the quantity multiplied by the product weight is at least 1kg
+    const weight = Math.max(qty * produk.weight, 1);
+    const ongkirCost = produk.weight ? parseFloat(weight) * ongkir : 0;
+    // calculate product cost
+    const productCost = qty * Number(produk.price);
     // calculate cost
-    const cost =
-      produk.weight && produk.price < 15000
-        ? qty * Number(produk.price) + qty * Number(produk.weight) * ongkir
-        : qty * Number(produk.price);
+    const cost = productCost < 15000 ? productCost + ongkirCost : productCost;
     const sufficientBalance = Number(account.balance) >= cost;
     if (!sufficientBalance) {
       return res
@@ -169,6 +184,26 @@ const payment = async (req, res) => {
       if (totalAmount === null) {
         throw new Error('Invalid total amount');
       }
+      const merchantInv = await getInvNumber(produk.merchant);
+      await tx.account.update({
+        where: {
+          owner: produk.merchant,
+        },
+        data: {
+          balance: {
+            increment: productCost,
+          },
+          Transaction: {
+            create: {
+              buyer: username,
+              amount: productCost,
+              type: Type.REVENUE,
+              invoice: merchantInv.invNumber,
+              description: `Rvenue from ${username} for ${qty} pcs of ${produk.kode}`,
+            },
+          },
+        },
+      });
       await tx.account.update({
         where: {
           id: account.id,
@@ -183,6 +218,8 @@ const payment = async (req, res) => {
       return tx.transaction.create({
         data: {
           account_id: account.id,
+          buyer: username,
+          merchant: produk.merchant,
           type: Type.PAYMENT,
           amount: totalAmount,
           invoice: invNumber,
@@ -197,10 +234,17 @@ const payment = async (req, res) => {
       });
     });
 
-    return res.status(200).json(transaction);
+    return res.status(200).json({
+      transaction,
+      harga: productCost,
+      delivery: productCost < 15000 ? ongkirCost : 0,
+      total: totalAmount,
+      discount: cost > 50000 ? '10%' : '0%',
+    });
   } catch (error) {
     if (error instanceof Error) {
-      return res.status(500).json({ error: error.message });
+      console.error(error);
+      return res.status(400).json({ error: error.message });
     }
     console.error(error);
     return res

@@ -9,8 +9,12 @@ const verifyToken = async (req, res, next) => {
     const payload = await decrypt(token);
     req.userId = payload.user.id;
     req.username = payload.user.username;
+    req.role = payload.user.role;
     next();
   } catch (error) {
+    if (error.code === 'ERR_JWT_EXPIRED') {
+      return res.status(401).json({ error: 'Token expired, please login' });
+    }
     console.error(error);
     return res
       .status(500)

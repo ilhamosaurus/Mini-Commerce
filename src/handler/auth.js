@@ -15,7 +15,7 @@ const register = async (req, res) => {
       .json({ errors: errors.array().map((error) => error.msg) });
   }
 
-  const { username, password } = req.body;
+  const { username, password, role } = req.body;
   const hashedPassword = await bycrpt.hash(password, 10);
 
   try {
@@ -23,6 +23,7 @@ const register = async (req, res) => {
       data: {
         username,
         password: hashedPassword,
+        role,
         Account: {
           create: {
             balance: 0,
@@ -68,7 +69,7 @@ const login = async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    const token = await generateToken(user.id, user.username);
+    const token = await generateToken(user.id, user.username, user.role);
 
     return res.status(200).json({ access_token: token });
   } catch (error) {

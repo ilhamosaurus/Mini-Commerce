@@ -12,8 +12,8 @@ const encrypt = async (payload) => {
     .sign(key);
 };
 
-const generateToken = async (id, username) => {
-  const user = { id, username };
+const generateToken = async (id, username, role) => {
+  const user = { id, username, role };
   const expires = new Date(Date.now() + 1000 * 60 * 60 * 3);
   const token = await encrypt({ user, expires });
 
